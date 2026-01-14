@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Page for You</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Floating Hearts Background */
+.heart {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #ff4d6d;
+  transform: rotate(45deg);
+  animation: floatUp linear infinite;
+  opacity: 0.7;
+  border-radius: 3px;
+}
+.heart::before,
+.heart::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #ff4d6d;
+  border-radius: 50%;
+}
+.heart::before { top: -7px; left: 0; }
+.heart::after { left: 7px; top: 0; }
+
+@keyframes floatUp {
+  0% { transform: translateY(0) rotate(45deg); opacity:0.7;}
+  100% { transform: translateY(-600px) rotate(45deg); opacity:0;}
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 30px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 500;
+}
+
+.subtitle {
+  text-align: center;
+  opacity: 0.7;
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+}
+
+/* PROFILE IMAGE WITH GLOW */
+.profile {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.profile img {
+  width: 160px;
+  height: 160px;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+  border: 2px solid rgba(255,255,255,0.2);
+  transition: 0.3s all ease;
+  cursor: pointer;
+}
+
+.profile img:hover {
+  box-shadow: 0 0 25px #ff4d6d, 0 0 50px #ff9db5;
+  transform: scale(1.05);
+}
+
+.card {
+  background: rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.card h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  color: #ff9db5;
+}
+
+.card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+a.button {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 22px;
+  background: #ff4d6d;
+  color: white;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+/* Soft Heart Animation on Click */
+.heart-click {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #ff4d6d;
+  transform: rotate(45deg);
+  border-radius: 3px;
+  animation: heartPop 1s ease forwards;
+}
+.heart-click::before,
+.heart-click::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #ff4d6d;
+  border-radius: 50%;
+}
+.heart-click::before { top: -10px; left: 0; }
+.heart-click::after { left: 10px; top: 0; }
+
+@keyframes heartPop {
+  0% { transform: scale(0) rotate(45deg); opacity:1;}
+  100% { transform: scale(1.5) translateY(-80px) rotate(45deg); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>A Page for You</h1>
+  <div class="subtitle">Quiet thoughts of you</div>
+
+  <!-- PROFILE IMAGE -->
+  <div class="profile">
+    <img src="lov.jpg" alt="Her photo" onclick="revealHiddenMessage()">
+  </div>
+
+  <div id="hiddenMsg" style="text-align:center; margin-bottom:15px; color:#ff9db5; display:none;">
+    You make my day brighter quietly 💖
+  </div>
+
+  <div class="card">
+    <h2>About You</h2>
+    <p>
+      Beautiful inside and out, with a heart full of kindness and a smile that lights up the room.
+      Kind, Caring, Loving, Hardworking, Helpful, Intelligent, Creative, Cheerful, Strong, Humble, Generous – and precious. Above all, you are my inspiration.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Why I Admire You</h2>
+    <p>
+      You've completely captivated me... heart and soul.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Moments I’m Thankful For</h2>
+    <p>
+      Conversations that felt safe. Laughter that came naturally.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>One Small Thing</h2>
+    <p>
+      Just having you around makes everything better. Thank you for being you.
+    </p>
+
+    <a class="button" href="messages.html" onclick="playMusic(); spawnHeart(event);">
+      Click when you feel tired
+    </a>
+  </div>
+
+  <div class="footer">
+   I miss you, Lov.
+  </div>
+
+</div>
+
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// Background music
+const music = document.getElementById("bgMusic");
+function playMusic() {
+    music.volume = 0.4;
+    music.currentTime = 0;
+    music.play().catch(() => {});
+}
+
+// Hidden message on picture click
+function revealHiddenMessage() {
+    const msg = document.getElementById("hiddenMsg");
+    msg.style.display = "block";
+}
+
+// Spawn heart animation on click
+function spawnHeart(e){
+    const heart = document.createElement("div");
+    heart.className = "heart-click";
+    heart.style.left = e.clientX - 10 + "px";
+    heart.style.top = e.clientY - 10 + "px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),1000);
+}
+
+// Floating hearts background
+for(let i=0;i<15;i++){
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.style.left = Math.random()*100+"%";
+    h.style.animationDuration = (4+Math.random()*3)+"s";
+    h.style.width = h.style.height = (10+Math.random()*15)+"px";
+    document.body.appendChild(h);
+}
+</script>
+
+</body>
+</html>

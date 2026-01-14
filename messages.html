@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Small Reminder</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top, #1a1a2e, #000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: white;
+}
+
+.box {
+  width: 300px;
+  background: rgba(255,255,255,0.08);
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+}
+
+.message {
+  min-height: 80px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 12px 26px;
+  border: none;
+  border-radius: 25px;
+  background: #ff4d6d;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.note {
+  margin-top: 15px;
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+
+.profile-msg {
+  width: 120px;
+  height: 120px;
+  border-radius: 15px;
+  object-fit: cover;
+  margin-bottom: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+  <!-- OPTIONAL PICTURE -->
+  <img src="lov.jpg" alt="Her photo" class="profile-msg">
+
+  <div class="message" id="msg">
+    Click when you need a reminder.
+  </div>
+
+  <button onclick="nextMessage()">Click</button>
+  <button onclick="goBack()">Back</button>
+
+  <div class="note">Miss you, Lov</div>
+</div>
+
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic2" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const messages = [
+"Even when the world is hard, I’ll always choose us.",
+"No matter how many times we stumble, I come back to you.",
+"You are my favorite decision — now and always.",
+"Through every up and down, you are still the one I choose.",
+"My heart knows no ending — it keeps choosing you.",
+"I’m yours, always and always.",
+"No distance or time can change what I feel for you.",
+"When everything falls apart, I find my way back to you.",
+"You are my safe place, my constant, my forever.",
+"Every day, my heart chooses you again.",
+"No storm can make me let go, I am yours completely.",
+"Forever and always, I will pick you."
+];
+
+function nextMessage() {
+  const msg = document.getElementById("msg");
+  const random = Math.floor(Math.random() * messages.length);
+  msg.textContent = messages[random];
+}
+
+// Back button
+function goBack() {
+  window.location.href = "index.html";
+}
+
+// Play music on first click
+const music2 = document.getElementById("bgMusic2");
+document.body.addEventListener('click', function playOnce() {
+    music2.volume = 0.4;
+    music2.currentTime = 0;
+    music2.play().catch(()=>{});
+    document.body.removeEventListener('click', playOnce);
+});
+</script>
+
+</body>
+</html>
